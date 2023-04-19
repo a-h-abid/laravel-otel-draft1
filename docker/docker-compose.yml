@@ -1,0 +1,24 @@
+networks:
+  common-net:
+    external: true
+
+services:
+
+  app:
+    build:
+      context: ../
+      dockerfile: docker/app/app.Dockerfile
+      args:
+        - TIMEZONE=${TIMEZONE}
+        - UID=${UID}
+        - GID=${GID}
+    tty: true
+    networks:
+      - common-net
+    env_file:
+      - .envs/web.env
+      - .envs/php-ini.env
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/var/www/html
