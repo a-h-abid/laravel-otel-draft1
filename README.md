@@ -10,3 +10,8 @@
 - In `docker` directory, run `docker compose build`
 - Run `docker compose run --rm composer install`
 - Run `docker compose up -d`
+
+## Usage
+
+- First visit the laravel app in your browser.
+- Visit the jaeger page (Usually http://localhost:16686) and see the graphs & traces.
