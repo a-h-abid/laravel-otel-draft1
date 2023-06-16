@@ -1,3 +1,7 @@
+volumes:
+  common-jaeger:
+    name: 'common-jaeger'
+
 services:
 
   jaeger:
@@ -10,3 +14,5 @@ services:
           - common-jaeger
     ports:
       - 127.0.0.1:${JAEGER_PUBLISH_PORT:-16686}:16686
+    volumes:
+      - common-jaeger:/tmp
