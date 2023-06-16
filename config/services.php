@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'otel_http' => [
+        'endpoint' => env('OTEL_HTTP_ENDPOINT', 'http://localhost:4318/v1/traces'),
+        'content_type' => env('OTEL_HTTP_CONTENT_TYPE', 'application/x-protobuf'),
+    ],
+
 ];

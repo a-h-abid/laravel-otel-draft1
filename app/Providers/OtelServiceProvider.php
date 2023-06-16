@@ -69,7 +69,10 @@ class OtelServiceProvider extends OtelApplicationServiceProvider
             new SimpleSpanProcessor(
                 exporter: new SpanExporter(
                     (new OtlpHttpTransportFactory())
-                        ->create('http://common-jaeger:4318/v1/traces', 'application/x-protobuf'),
+                        ->create(
+                            endpoint: config('services.otel_http.endpoint'),
+                            contentType: config('services.otel_http.content_type'),
+                        ),
                 ),
             ),
         ];
