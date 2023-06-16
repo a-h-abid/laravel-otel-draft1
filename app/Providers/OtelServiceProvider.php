@@ -66,12 +66,12 @@ class OtelServiceProvider extends OtelApplicationServiceProvider
         // spans to a different collector.
 
         return [
-            // new SimpleSpanProcessor(
-            //     exporter: new SpanExporter(
-            //         (new OtlpHttpTransportFactory())
-            //             ->create('http://127.0.0.1:4318/v1/traces', 'application/x-protobuf'),
-            //     ),
-            // ),
+            new SimpleSpanProcessor(
+                exporter: new SpanExporter(
+                    (new OtlpHttpTransportFactory())
+                        ->create('http://common-jaeger:4318/v1/traces', 'application/x-protobuf'),
+                ),
+            ),
         ];
     }
 }
