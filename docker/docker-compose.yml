@@ -5,6 +5,7 @@ networks:
 services:
 
   app:
+    image: 'lv10-otel1-app:latest'
     build:
       context: ../
       dockerfile: docker/app/app.Dockerfile
@@ -13,6 +14,8 @@ services:
         - UID=${UID}
         - GID=${GID}
     tty: true
+    command:
+      - apache2-foreground
     networks:
       - common-net
     env_file:
@@ -20,5 +23,20 @@ services:
       - .envs/php-ini.env
     ports:
       - 8080:8080
+    volumes:
+      - ../:/var/www/html
+
+  queue:
+    image: 'lv10-otel1-app:latest'
+    tty: true
+    command:
+      - php
+      - artisan
+      - queue:work
+    stop_signal: SIGTERM
+    networks:
+      - common-net
+    env_file:
+      - .envs/php-ini.env
     volumes:
       - ../:/var/www/html
